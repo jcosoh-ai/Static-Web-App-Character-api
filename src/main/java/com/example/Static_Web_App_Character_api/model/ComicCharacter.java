@@ -1,11 +1,16 @@
 package com.example.Static_Web_App_Character_api.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "characters")
 
-public class Character {
+public class ComicCharacter {
  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long characterId;
@@ -21,11 +26,11 @@ public class Character {
     private int age;
 
    
-    public Character() {
+    public ComicCharacter() {
     }
 
    
-    public Character(String name, String description, String universe, String species, int age) {
+    public ComicCharacter(String name, String description, String universe, String species, int age) {
         this.name = name;
         this.description = description;
         this.universe = universe;
