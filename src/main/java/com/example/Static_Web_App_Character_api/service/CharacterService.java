@@ -22,14 +22,8 @@ public class CharacterService {
     }
 
     // get character by id
-    public ComicCharacter getCharacterById(Long id) {
-        Optional<ComicCharacter> character = characterRepository.findById(id);
-
-        if (character.isPresent()) {
-            return character.get();
-        } else {
-            throw new RuntimeException("Character not found");
-        }
+    public Optional<ComicCharacter> getCharacterById(Long id) {
+        return characterRepository.findById(id);
     }
 
     // add new character
@@ -38,22 +32,29 @@ public class CharacterService {
     }
 
     // update character
-    public ComicCharacter updateCharacter(Long id, ComicCharacter updatedCharacter) {
-
-        ComicCharacter character = getCharacterById(id);
-
-        character.setName(updatedCharacter.getName());
-        character.setDescription(updatedCharacter.getDescription());
-        character.setUniverse(updatedCharacter.getUniverse());
-        character.setSpecies(updatedCharacter.getSpecies());
-        character.setAge(updatedCharacter.getAge());
-
-        return characterRepository.save(character);
+    public Optional<ComicCharacter> updateCharacter(Long id, ComicCharacter updatedCharacter) {
+        Optional<ComicCharacter> optionalCharacter = characterRepository.findById(id);
+        if (optionalCharacter.isPresent()) {
+            ComicCharacter character = optionalCharacter.get();
+            character.setName(updatedCharacter.getName());
+            character.setDescription(updatedCharacter.getDescription());
+            character.setUniverse(updatedCharacter.getUniverse());
+            character.setSpecies(updatedCharacter.getSpecies());
+            character.setAge(updatedCharacter.getAge());
+            return Optional.of(characterRepository.save(character));
+        } else {
+            return Optional.empty();
+        }
     }
 
     // delete character
-    public void deleteCharacter(Long id) {
-        characterRepository.deleteById(id);
+    public boolean deleteCharacter(Long id) {
+        if (characterRepository.existsById(id)) {
+            characterRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // get characters by universe

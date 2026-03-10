@@ -6,6 +6,9 @@ import com.example.Static_Web_App_Character_api.service.CharacterService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/characters")
@@ -26,7 +29,8 @@ public class CharacterController {
     // GET character by ID
     @GetMapping("/{id}")
     public ComicCharacter getCharacterById(@PathVariable Long id) {
-        return characterService.getCharacterById(id);
+        return characterService.getCharacterById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Character not found"));
     }
 
     // POST new character
@@ -38,13 +42,18 @@ public class CharacterController {
     // PUT update character
     @PutMapping("/{id}")
     public ComicCharacter updateCharacter(@PathVariable Long id, @RequestBody ComicCharacter character) {
-        return characterService.updateCharacter(id, character);
+        return characterService.updateCharacter(id, character)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Character not found"));
     }
 
     // DELETE character
     @DeleteMapping("/{id}")
-    public void deleteCharacter(@PathVariable Long id) {
-        characterService.deleteCharacter(id);
+    public ResponseEntity<Void> deleteCharacter(@PathVariable Long id) {
+        if (characterService.deleteCharacter(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // GET characters by category (universe example)
