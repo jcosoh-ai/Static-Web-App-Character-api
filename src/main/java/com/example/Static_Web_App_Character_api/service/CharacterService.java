@@ -22,16 +22,19 @@ public class CharacterService {
     }
 
     // get character by id
+    @SuppressWarnings("null")
     public Optional<ComicCharacter> getCharacterById(Long id) {
         return characterRepository.findById(id);
     }
 
     // add new character
+    @SuppressWarnings("null")
     public ComicCharacter addCharacter(ComicCharacter character) {
         return characterRepository.save(character);
     }
 
     // update character
+    @SuppressWarnings("null")
     public Optional<ComicCharacter> updateCharacter(Long id, ComicCharacter updatedCharacter) {
         Optional<ComicCharacter> optionalCharacter = characterRepository.findById(id);
         if (optionalCharacter.isPresent()) {
@@ -48,6 +51,7 @@ public class CharacterService {
     }
 
     // delete character
+    @SuppressWarnings("null")
     public boolean deleteCharacter(Long id) {
         if (characterRepository.existsById(id)) {
             characterRepository.deleteById(id);
