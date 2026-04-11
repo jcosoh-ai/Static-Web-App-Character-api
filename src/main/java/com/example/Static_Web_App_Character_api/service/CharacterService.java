@@ -35,20 +35,24 @@ public class CharacterService {
 
     // update character
     @SuppressWarnings("null")
-    public Optional<ComicCharacter> updateCharacter(Long id, ComicCharacter updatedCharacter) {
-        Optional<ComicCharacter> optionalCharacter = characterRepository.findById(id);
-        if (optionalCharacter.isPresent()) {
-            ComicCharacter character = optionalCharacter.get();
-            character.setName(updatedCharacter.getName());
-            character.setDescription(updatedCharacter.getDescription());
-            character.setUniverse(updatedCharacter.getUniverse());
-            character.setSpecies(updatedCharacter.getSpecies());
-            character.setAge(updatedCharacter.getAge());
-            return Optional.of(characterRepository.save(character));
-        } else {
-            return Optional.empty();
-        }
+    public Optional<ComicCharacter> updateCharacter1(Long id, ComicCharacter updatedCharacter) {
+    Optional<ComicCharacter> optionalCharacter = characterRepository.findById(id);
+
+    if (optionalCharacter.isPresent()) {
+        ComicCharacter character = optionalCharacter.get();
+
+        character.setName(updatedCharacter.getName());
+        character.setDescription(updatedCharacter.getDescription());
+        character.setUniverse(updatedCharacter.getUniverse());
+        character.setSpecies(updatedCharacter.getSpecies());
+        character.setAge(updatedCharacter.getAge());
+
+        return Optional.of(characterRepository.save(character));
+    } else {
+        return Optional.empty();
     }
+}
+    
 
     // delete character
     @SuppressWarnings("null")
@@ -69,5 +73,10 @@ public class CharacterService {
     // search characters
     public List<ComicCharacter> searchCharacters(String name) {
         return characterRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    public Optional<ComicCharacter> updateCharacter(Long id, ComicCharacter character) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateCharacter'");
     }
 }

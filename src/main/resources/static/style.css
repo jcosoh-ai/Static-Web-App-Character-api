@@ -1,0 +1,41 @@
+/* Reset spacing */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #222;
+    padding: 15px;
+}
+
+.navbar a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+/* Grid layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Character cards */
+.grid div {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Fix image size */
+.grid img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}

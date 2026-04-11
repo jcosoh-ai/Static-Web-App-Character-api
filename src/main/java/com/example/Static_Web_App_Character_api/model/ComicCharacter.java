@@ -21,6 +21,9 @@ public class ComicCharacter {
     @Column(nullable = false)
     private String description;
 
+    @Column
+private String image;
+
     private String universe;
     private String species;
     private int age;
@@ -87,4 +90,17 @@ public class ComicCharacter {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getImage() {
+    return image;
+}
+
+public void setImage(String image) {
+    this.image = image;
+}
+
+
+    public Long getId() {
+    return characterId;
+}
 }

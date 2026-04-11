@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/characters")
+@RequestMapping("/api/characters")
 public class CharacterController {
 
     private CharacterService characterService;
@@ -27,11 +27,11 @@ public class CharacterController {
     }
 
     // GET character by ID
-    @GetMapping("/{id}")
-    public ComicCharacter getCharacterById(@PathVariable Long id) {
-        return characterService.getCharacterById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Character not found"));
-    }
+   @GetMapping("/{id}")
+public ComicCharacter getCharacterById(@PathVariable Long id) {
+    return characterService.getCharacterById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Character not found"));
+}
 
     // POST new character
     @PostMapping
